@@ -1,5 +1,5 @@
 {
-  "name": "@the-convocation/twitter-scraper",
+  "name": "@tidytiny/twitter-scraper",
   "description": "A port of n0madic/twitter-scraper to Node.js.",
   "keywords": [
     "x",
@@ -50,6 +50,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
+    "@types/chrome": "^0.0.270",
     "@tsconfig/node16": "^16.1.0",
     "@types/jest": "^29.5.1",
     "@types/json-stable-stringify": "^1.0.34",

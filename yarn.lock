@@ -1146,6 +1146,14 @@
   dependencies:
     "@babel/types" "^7.20.7"
 
+"@types/chrome@^0.0.270":
+  version "0.0.270"
+  resolved "https://registry.npmmirror.com/@types/chrome/-/chrome-0.0.270.tgz#575f47107652ef75d4841ec8ffa018137c8f51e7"
+  integrity sha512-ADvkowV7YnJfycZZxL2brluZ6STGW+9oKG37B422UePf2PCXuFA/XdERI0T18wtuWPx0tmFeZqq6MOXVk1IC+Q==
+  dependencies:
+    "@types/filesystem" "*"
+    "@types/har-format" "*"
+
 "@types/conventional-commits-parser@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@types/conventional-commits-parser/-/conventional-commits-parser-5.0.0.tgz#8c9d23e0b415b24b91626d07017303755d542dc8"
@@ -1158,12 +1166,29 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.5.tgz#a6ce3e556e00fd9895dd872dd172ad0d4bd687f4"
   integrity sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==
 
+"@types/filesystem@*":
+  version "0.0.36"
+  resolved "https://registry.npmmirror.com/@types/filesystem/-/filesystem-0.0.36.tgz#7227c2d76bfed1b21819db310816c7821d303857"
+  integrity sha512-vPDXOZuannb9FZdxgHnqSwAG/jvdGM8Wq+6N4D/d80z+D4HWH+bItqsZaVRQykAn6WEVeEkLm2oQigyHtgb0RA==
+  dependencies:
+    "@types/filewriter" "*"
+
+"@types/filewriter@*":
+  version "0.0.33"
+  resolved "https://registry.npmmirror.com/@types/filewriter/-/filewriter-0.0.33.tgz#d9d611db9d9cd99ae4e458de420eeb64ad604ea8"
+  integrity sha512-xFU8ZXTw4gd358lb2jw25nxY9QAgqn2+bKKjKOYfNCzN4DKCFetK7sPtrlpg66Ywe3vWY9FNxprZawAh9wfJ3g==
+
 "@types/graceful-fs@^4.1.3":
   version "4.1.9"
   resolved "https://registry.yarnpkg.com/@types/graceful-fs/-/graceful-fs-4.1.9.tgz#2a06bc0f68a20ab37b3e36aa238be6abdf49e8b4"
   integrity sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==
   dependencies:
     "@types/node" "*"
+
+"@types/har-format@*":
+  version "1.2.16"
+  resolved "https://registry.npmmirror.com/@types/har-format/-/har-format-1.2.16.tgz#b71ede8681400cc08b3685f061c31e416cf94944"
+  integrity sha512-fluxdy7ryD3MV6h8pTfTYpy/xQzCFC7m89nOH9y94cNqJ1mDIDPut7MnRHI3F6qRmh/cT2fUjG1MLdCNb4hE9A==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.6"

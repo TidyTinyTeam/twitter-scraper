@@ -1,3 +1,5 @@
+/// <reference types="chrome"/>
+
 import { Cookie, CookieJar, MemoryCookieStore } from 'tough-cookie';
 import { updateCookieJar } from './requests';
 import { Headers } from 'headers-polyfill';
@@ -144,17 +146,17 @@ export class TwitterGuestAuth implements TwitterAuth {
   }
 
   async installTo(headers: Headers): Promise<void> {
-    if (this.shouldUpdate()) {
-      await this.updateGuestToken();
-    }
+    // if (this.shouldUpdate()) {
+    //   await this.updateGuestToken();
+    // }
 
-    const token = this.guestToken;
-    if (token == null) {
-      throw new Error('Authentication token is null or undefined.');
-    }
+    // const token = this.guestToken;
+    // if (token == null) {
+    //   throw new Error('Authentication token is null or undefined.');
+    // }
 
     headers.set('authorization', `Bearer ${this.bearerToken}`);
-    headers.set('x-guest-token', token);
+    // headers.set('x-guest-token', token);
 
     const cookies = await this.getCookies();
     const xCsrfToken = cookies.find((cookie) => cookie.key === 'ct0');
@@ -165,12 +167,31 @@ export class TwitterGuestAuth implements TwitterAuth {
     headers.set('cookie', await this.getCookieString());
   }
 
-  protected getCookies(): Promise<Cookie[]> {
-    return this.jar.getCookies(this.getCookieJarUrl());
+  protected async getCookies(): Promise<Cookie[]> {
+    return new Promise((resolve) => {
+      chrome.cookies.getAll({ domain: 'x.com' }, (cookies) => {
+        const toughCookies = cookies.map(
+          (cookie) =>
+            new Cookie({
+              key: cookie.name,
+              value: cookie.value,
+              domain: cookie.domain,
+              path: cookie.path,
+              expires: cookie.expirationDate
+                ? new Date(cookie.expirationDate * 1000)
+                : undefined,
+              httpOnly: cookie.httpOnly,
+              secure: cookie.secure,
+            }),
+        );
+        resolve(toughCookies);
+      });
+    });
   }
 
-  protected getCookieString(): Promise<string> {
-    return this.jar.getCookieString(this.getCookieJarUrl());
+  protected async getCookieString(): Promise<string> {
+    const cookies = await this.getCookies();
+    return cookies.map((cookie) => `${cookie.key}=${cookie.value}`).join('; ');
   }
 
   protected async removeCookie(key: string): Promise<void> {
@@ -190,14 +211,14 @@ export class TwitterGuestAuth implements TwitterAuth {
   private getCookieJarUrl(): string {
     return typeof document !== 'undefined'
       ? document.location.toString()
-      : 'https://twitter.com';
+      : 'https://x.com';
   }
 
   /**
    * Updates the authentication state with a new guest token from the Twitter API.
    */
   protected async updateGuestToken() {
-    const guestActivateUrl = 'https://api.twitter.com/1.1/guest/activate.json';
+    const guestActivateUrl = 'https://api.x.com/1.1/guest/activate.json';
 
     const headers = new Headers({
       Authorization: `Bearer ${this.bearerToken}`,
