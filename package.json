@@ -21,7 +21,7 @@
       "require": "./dist/default/cjs/index.js"
     }
   },
-  "repository": "https://github.com/the-convocation/twitter-scraper.git",
+  "repository": "https://github.com/TidyTinyTeam/twitter-scraper.git",
   "author": "karashiiro <49822414+karashiiro@users.noreply.github.com>",
   "license": "MIT",
   "engines": {
