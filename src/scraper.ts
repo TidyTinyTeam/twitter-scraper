@@ -1,4 +1,5 @@
 import { Cookie } from 'tough-cookie';
+import { extractors } from '@tidytiny/rettiwt-api/dist/collections/Extractors';
 import { bearerToken, FetchTransformOptions, RequestApiResult } from './api';
 import { TwitterAuth, TwitterAuthOptions, TwitterGuestAuth } from './auth';
 import { TwitterUserAuth } from './auth-user';
@@ -32,8 +33,10 @@ import {
   fetchListTweets,
   getTweetsAndRepliesByUserId,
   getTweetsAndReplies,
+  postTweet,
 } from './tweets';
 import fetch from 'cross-fetch';
+import { TweetArgs } from '@tidytiny/rettiwt-api';
 
 const twUrl = 'https://twitter.com';
 
@@ -498,5 +501,14 @@ export class Scraper {
     }
 
     return res.value;
+  }
+
+  public async postTweet(tweet: TweetArgs): Promise<string | null> {
+    const res = await postTweet(tweet, this.auth);
+    if (!res) {
+      return null;
+    }
+
+    return extractors['TWEET_POST'](res);
   }
 }

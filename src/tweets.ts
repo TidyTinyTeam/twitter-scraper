@@ -1,3 +1,6 @@
+import { ITweetPostResponse, type TweetArgs } from '@tidytiny/rettiwt-api';
+
+import { MediaVariable, ReplyVariable } from 'rettiwt-core';
 import { addApiFeatures, requestApi } from './api';
 import { TwitterAuth } from './auth';
 import { getUserIdByScreenName } from './profile';
@@ -410,4 +413,70 @@ export async function getTweetAnonymous(
   }
 
   return parseTimelineEntryItemContentRaw(res.value.data, id);
+}
+
+export async function postTweet(
+  tweet: TweetArgs,
+  auth: TwitterAuth,
+): Promise<ITweetPostResponse | null> {
+  const requestConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      /* eslint-disable @typescript-eslint/naming-convention */
+      variables: {
+        tweet_text: tweet.text,
+        dark_request: false,
+        attachment_url: tweet.quote
+          ? `https://x.com/i/status/${tweet.quote}`
+          : undefined,
+        media: tweet.media ? new MediaVariable(tweet.media) : undefined,
+        reply: tweet.replyTo ? new ReplyVariable(tweet.replyTo) : undefined,
+        semantic_annotation_ids: [],
+      },
+      features: {
+        tweetypie_unmention_optimization_enabled: true,
+        responsive_web_edit_tweet_api_enabled: true,
+        graphql_is_translatable_rweb_tweet_is_translatable_enabled: true,
+        view_counts_everywhere_api_enabled: true,
+        longform_notetweets_consumption_enabled: true,
+        responsive_web_twitter_article_tweet_consumption_enabled: false,
+        tweet_awards_web_tipping_enabled: false,
+        longform_notetweets_rich_text_read_enabled: true,
+        longform_notetweets_inline_media_enabled: true,
+        responsive_web_graphql_exclude_directive_enabled: true,
+        verified_phone_label_enabled: true,
+        freedom_of_speech_not_reach_fetch_enabled: true,
+        standardized_nudges_misinfo: true,
+        tweet_with_visibility_results_prefer_gql_limited_actions_policy_enabled:
+          true,
+        responsive_web_media_download_video_enabled: false,
+        responsive_web_graphql_skip_user_profile_image_extensions_enabled:
+          false,
+        responsive_web_graphql_timeline_navigation_enabled: true,
+        responsive_web_enhance_cards_enabled: false,
+        rweb_video_timestamps_enabled: true,
+        c9s_tweet_anatomy_moderator_badge_enabled: true,
+      },
+    }),
+  };
+
+  const res = await requestApi<ITweetPostResponse>(
+    'https://x.com/i/api/graphql/bDE2rBtZb3uyrczSZ_pI9g/CreateTweet',
+    auth,
+    'POST',
+    undefined,
+    requestConfig,
+  );
+
+  if (!res.success) {
+    throw res.err;
+  }
+
+  if (!res.value) {
+    return null;
+  }
+
+  return res.value;
 }
