@@ -98,7 +98,7 @@ async function getFollowingTimeline(
   params.set('variables', stringify(variables));
 
   const res = await requestApi<RelationshipTimeline>(
-    `https://twitter.com/i/api/graphql/iSicc7LrzWGBgDPL0tM_TQ/Following?${params.toString()}`,
+    `https://x.com/i/api/graphql/iSicc7LrzWGBgDPL0tM_TQ/Following?${params.toString()}`,
     auth,
   );
 
@@ -146,7 +146,7 @@ async function getFollowersTimeline(
   params.set('variables', stringify(variables));
 
   const res = await requestApi<RelationshipTimeline>(
-    `https://twitter.com/i/api/graphql/rRXFSG5vR6drKr5M37YOTw/Followers?${params.toString()}`,
+    `https://x.com/i/api/graphql/rRXFSG5vR6drKr5M37YOTw/Followers?${params.toString()}`,
     auth,
   );
 

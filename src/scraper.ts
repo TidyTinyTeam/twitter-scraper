@@ -38,7 +38,7 @@ import {
 import fetch from 'cross-fetch';
 import { TweetArgs } from '@tidytiny/rettiwt-api';
 
-const twUrl = 'https://twitter.com';
+const twUrl = 'https://x.com';
 
 export interface ScraperOptions {
   /**

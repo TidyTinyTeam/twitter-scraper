@@ -1,5 +1,5 @@
 {
-  "version": "0.14.2",
+  "version": "0.14.3",
   "name": "@tidytiny/twitter-scraper",
   "description": "A port of n0madic/twitter-scraper to Node.js.",
   "keywords": [
