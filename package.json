@@ -1,5 +1,5 @@
 {
-  "version": "0.14.3",
+  "version": "0.15.1",
   "name": "@tidytiny/twitter-scraper",
   "description": "A port of n0madic/twitter-scraper to Node.js.",
   "keywords": [
@@ -78,7 +78,7 @@
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-esbuild": "^6.1.1",
     "ts-jest": "^29.1.0",
-    "typedoc": "^0.24.7",
+    "typedoc": "^0.27.6",
     "typescript": "^5.0.4"
   },
   "config": {

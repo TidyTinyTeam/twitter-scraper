@@ -37,6 +37,7 @@ import {
 } from './tweets';
 import fetch from 'cross-fetch';
 import { TweetArgs } from '@tidytiny/rettiwt-api';
+import { RateLimitStrategy } from './rate-limit';
 
 const twUrl = 'https://x.com';
 
@@ -52,6 +53,11 @@ export interface ScraperOptions {
    * proxy requests through other hosts, for example.
    */
   transform: Partial<FetchTransformOptions>;
+
+  /**
+   * A handling strategy for rate limits (HTTP 429).
+   */
+  rateLimitStrategy: RateLimitStrategy;
 }
 
 /**
@@ -492,6 +498,7 @@ export class Scraper {
     return {
       fetch: this.options?.fetch,
       transform: this.options?.transform,
+      rateLimitStrategy: this.options?.rateLimitStrategy,
     };
   }
 
